@@ -5,6 +5,13 @@ defmodule Midifile.Event do
     delta_time: 0,
     bytes: []                   # data bytes, including status byte
 
+
+  @type t() :: %__MODULE__{
+    symbol: atom,
+    delta_time: non_neg_integer,
+    bytes: [non_neg_integer]
+  }
+
   def status(%Midifile.Event{bytes: [st|_]}) when st < 0xf0, do: band(st, 0xf0)
   def status(%Midifile.Event{bytes: [st|_]}), do: st
 

@@ -5,6 +5,11 @@ defmodule Midifile.Track do
   defstruct name: "Unnamed",
     events: []
 
+  @type t() :: %__MODULE__{
+    name: String.t(),
+    events: [%Event{}]
+  }
+
   def instrument(%Midifile.Track{events: nil}), do: ""
   def instrument(%Midifile.Track{events: []}),  do: ""
   def instrument(%Midifile.Track{events: list})  do

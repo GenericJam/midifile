@@ -3,10 +3,19 @@ defmodule Midifile.Sequence do
   @default_bpm 120
 
   use Bitwise
+  alias Midifile.Track
 
   defstruct format: 1, division: 480,
     conductor_track: nil,
     tracks: []
+
+
+  @type t() :: %{
+    format: non_neg_integer,
+    division: non_neg_integer,
+    conductor_track: %Track{} | nil,
+    tracks: [%Track{}] 
+  }
 
   def name(%Midifile.Sequence{conductor_track: nil}), do: ""
   def name(%Midifile.Sequence{conductor_track: %Midifile.Track{events: []}}),  do: ""
