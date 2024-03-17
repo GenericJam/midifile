@@ -1,18 +1,18 @@
 defmodule Midifile.Track do
-
   alias Midifile.Event
 
   defstruct name: "Unnamed",
-    events: []
+            events: []
 
   @type t() :: %__MODULE__{
-    name: String.t(),
-    events: [%Event{}]
-  }
+          name: String.t(),
+          events: [%Event{}]
+        }
 
   def instrument(%Midifile.Track{events: nil}), do: ""
-  def instrument(%Midifile.Track{events: []}),  do: ""
-  def instrument(%Midifile.Track{events: list})  do
+  def instrument(%Midifile.Track{events: []}), do: ""
+
+  def instrument(%Midifile.Track{events: list}) do
     Enum.find(list, %Event{}, &(&1.symbol == :instrument)).bytes
   end
 
